@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_export_customer_pricelist_form" model="ir.ui.view">
+        <field name="name">export.customer.pricelist.form</field>
+        <field name="model">export.customer.pricelist</field>
+        <field name="arch" type="xml">
+            <form string="Export Customer Pricelist">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="file_type" widget="radio" options="{'horizontal': true}" attrs="{'invisible':[('file','!=',False)],'required':[('file','=',False)] }"/>
+                            <field name="partner_ids" widget="many2many_tags" string="Customer" attrs="{'invisible':[('file','!=',False)],'required':[('file','=',False)]}" />
+                            <field name="file"  filename="file_name" readonly="1" attrs="{'invisible':[('file','=',False)]}"/>
+                            <field name="file_name" invisible="1" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="customer_pricelist_xls" string="Export Customer Pricelist" type="object" class="btn-primary" attrs="{'invisible':[('file','!=',False)]}"/>
+                        <button name="send_by_mail_customer_pricelist" string="Send By Email Customer Pricelist" type="object" class="btn-primary" attrs="{'invisible':[('file','!=',False)]}"/>                        
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_export_customer_pricelist" model="ir.actions.act_window">
+        <field name="name">Export Customer Pricelist</field>
+        <field name="res_model">export.customer.pricelist</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="wizard_export_customer_pricelist" 
+        name="Export Customer Pricelist" 
+        parent="sale.menu_sale_report"
+        action="action_export_customer_pricelist"/>
+
+</odoo>

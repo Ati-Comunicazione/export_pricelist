@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+    <template id="report_exportcustomerinfo">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <div class="oe_structure"/> 
+                        <table width="100%" style="font-size:21px;border-style: none;margin-bottom:15px;">
+                            <tr style="border-style: none;">
+                                <td style="border-style: none;">
+                                	<center><strong>Export Customer Pricelist</strong></center>
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="100%" style="font-size:13px;margin-bottom:15px;">
+                            <tr width="100%" style="font-size:13px;font-family: 'Times New Roman', Times, serif;">
+                                <td width="50%" style="background:#e6e6e6;color:#000000;font-family:verdana;font-weight:bold;min-height:30px;line-height:20px;font-size:13px;border: 1px solid black;">
+                                    <center>
+                                        Customer 
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr width="100%" style="font-size:13px;font-family: 'Times New Roman', Times, serif;">
+                                <td width="50%" style="font-family:verdana;font-weight:bold;min-height:30px;line-height:20px;font-size:13px;border: 1px solid black;">
+                                    <center>
+                                        <span t-esc="doc.name" />
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="100%" style="font-size:13px;font-family: 'Times New Roman', Times, serif;">
+                            <tr style="min-height:30px;line-height:20px;font-size:13px;font-family: 'Times New Roman', Times, serif;" width="100%">
+                                <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                    <center>
+                                        Product Id
+                                    </center>
+                                </td>
+                                <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                    <center>
+                                        Product Name
+                                    </center>
+                                </td>
+                                <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                    <center>
+                                        Product Code
+                                    </center>
+                                </td>
+                                <td  style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                    <center>
+                                        Barcode
+                                    </center>
+                                </td>
+                                <td  style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                    <center>
+                                        Public Price
+                                    </center>
+                                </td>
+                                <td  style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                    <center>
+                                        Discount
+                                    </center>
+                                </td>
+                                <td  style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                    <center>
+                                        Customer Price
+                                    </center>
+                                </td>
+                            </tr>
+                             <t t-foreach="get_customer_details(doc)" t-as="record">
+                             	<tr style="font-size:13px;">
+                                    <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                        <span t-esc="record.get('product_id')"/>
+                                    </td>
+                                    <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                        <span t-esc="record.get('product_name')"/>
+                                    </td>
+                                    <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                        <span t-esc="record.get('product_code')"/>
+                                    </td>
+                                    <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                        <span t-esc="record.get('product_barcode')"/>
+                                    </td>
+                                    <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                        <span t-esc="'%.2f'% record.get('public_price')"/>
+                                    </td>
+                                    <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                        <span t-esc="'%.2f'% record.get('price_discount')"/> % 
+                                    </td>
+                                    <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                        <span t-esc="'%.2f'% record.get('customer_price')"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                    <div style="page-break-before:always;"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
